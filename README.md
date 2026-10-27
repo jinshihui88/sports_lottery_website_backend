@@ -53,35 +53,29 @@
 ## 项目结构
 
 ```
-sports_lottery_website/
-├── frontend/                 # 前端项目
-│   ├── src/
-│   │   ├── components/      # 组件
-│   │   ├── views/          # 页面
-│   │   ├── stores/         # Pinia状态管理
-│   │   ├── router/         # 路由配置
-│   │   ├── types/          # TypeScript类型定义
-│   │   └── utils/          # 工具函数
-│   ├── package.json
-│   ├── vite.config.ts
-│   ├── tsconfig.json
-│   ├── tailwind.config.js
-│   └── index.html
-├── backend/                 # 后端项目
-│   ├── src/main/java/com/sports/lottery/
-│   │   ├── controller/     # 控制器
-│   │   ├── service/        # 服务层
-│   │   ├── mapper/         # 数据访问层
-│   │   ├── entity/         # 实体类
-│   │   ├── dto/            # 数据传输对象
-│   │   ├── config/         # 配置类
-│   │   └── util/           # 工具类
-│   ├── src/main/resources/
-│   │   ├── mapper/         # MyBatis XML映射文件
-│   │   ├── sql/            # 数据库脚本
-│   │   └── application.yml # 配置文件
-│   └── pom.xml
-└── README.md
+sports_lottery_website_backend/
+├── src/
+│   ├── main/
+│   │   ├── java/com/sports/lottery/
+│   │   │   ├── common/         # 通用响应封装
+│   │   │   ├── controller/     # 控制器
+│   │   │   ├── service/        # 服务层
+│   │   │   ├── mapper/         # 数据访问层
+│   │   │   ├── entity/         # 实体类
+│   │   │   ├── dto/            # 数据传输对象
+│   │   │   ├── config/         # 配置类
+│   │   │   └── util/           # 工具类
+│   │   └── resources/
+│   │       ├── mapper/         # MyBatis XML映射文件
+│   │       ├── sql/            # 数据库脚本
+│   │       └── application.yml # 配置文件
+│   └── test/                   # 单元测试
+├── docs/                       # 项目文档
+│   └── 后端技术架构.md          # 后端技术架构说明
+├── pom.xml
+├── .gitignore
+├── README.md
+└── 项目完成总结.md
 ```
 
 ## 快速开始
@@ -101,15 +95,12 @@ CREATE DATABASE sports_lottery DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uni
 
 2. 执行初始化脚本：
 ```bash
-mysql -u root -p sports_lottery < backend/src/main/resources/sql/schema.sql
+mysql -u root -p sports_lottery < src/main/resources/sql/schema.sql
 ```
 
 ### 后端启动
 
-1. 进入后端目录：
-```bash
-cd backend
-```
+1. 在项目根目录执行：
 
 2. 修改数据库配置（如需要）：
 编辑 `src/main/resources/application.yml` 文件中的数据库连接信息。
@@ -198,7 +189,6 @@ npm run build
 
 ### 后端部署
 ```bash
-cd backend
 mvn clean package
 java -jar target/lottery-backend-1.0.0.jar
 ```

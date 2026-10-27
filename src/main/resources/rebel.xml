@@ -9,7 +9,7 @@
 	<id>lottery-backend</id>
 
 	<classpath>
-		<dir name="D:/IdeaProjects/sports_lottery_website/backend/target/classes">
+		<dir name="D:/project/sports_lottery_website_backend/target/classes">
 		</dir>
 	</classpath>
 
