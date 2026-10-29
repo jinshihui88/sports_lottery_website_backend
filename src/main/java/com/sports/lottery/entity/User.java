@@ -50,6 +50,9 @@ public class User {
     @TableField("avatar")
     private String avatar;
 
+    /**
+     * 状态：0-禁用，1-启用
+     */
     @Schema(description = "状态：0-禁用，1-启用")
     @TableField("status")
     private Integer status;

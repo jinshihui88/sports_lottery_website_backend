@@ -81,6 +81,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 从Redis缓存读取登录结果：校验密码与账户状态后直接复用缓存的Token
+     *
+     * @param request 登录请求
+     * @param cacheKey 登录缓存Key
+     * @param cached 缓存值
+     * @return 登录结果，包含JWT Token和用户信息
      */
     private LoginResult loginFromCache(LoginRequest request, String cacheKey, String cached) {
         LoginCache cache = JSON.parseObject(cached, LoginCache.class);
@@ -117,6 +122,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 数据库登录流程：校验用户与密码后生成新Token，并写入Redis缓存
+     *
+     * @param request 登录请求
+     * @param cacheKey 登录缓存Key
+     * @return 登录结果，包含JWT Token和用户信息
      */
     private LoginResult loginFromDb(LoginRequest request, String cacheKey) {
         // 查询用户
@@ -146,13 +155,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LoginCache cache = new LoginCache(token, user.getId(), user.getUsername(), user.getPassword(),
                 user.getEmail(), user.getNickname(), user.getAvatar(), user.getStatus(),
                 user.getCreateTime(), user.getLastLoginTime());
-        redisTemplate.opsForValue().set(cacheKey, JSON.toJSONString(cache),
-                cacheExpiration, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(cacheKey, JSON.toJSONString(cache), cacheExpiration, TimeUnit.SECONDS);
         return new LoginResult(token, user);
     }
 
     /**
      * 构建登录缓存Key
+     *
+     * @param username 用户名
+     * @return 登录缓存Key
      */
     private String buildLoginCacheKey(String username) {
         return LOGIN_CACHE_PREFIX + username;
