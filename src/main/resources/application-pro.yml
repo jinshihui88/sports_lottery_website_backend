@@ -18,19 +18,18 @@ spring:
       idle-timeout: 600000
       max-lifetime: 1800000
 
-  # Redis 配置
-  data:
-    redis:
-      host: 39.107.71.31
-      port: 6379
-      password: AXB37nVDNQrvWK@jPpfJERxG8
-      database: 0
-      timeout: 3000ms
-      lettuce:
-        pool:
-          max-active: 8
-          max-idle: 8
-          min-idle: 0
+  # Redis 配置（Spring Boot 2.7 前缀为 spring.redis，勿用 Boot3 的 spring.data.redis）
+  redis:
+    host: 39.107.71.31
+    port: 6379
+    password: AXB37nVDNQrvWK@jPpfJERxG8
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
 
   # Jackson 配置
   jackson:

@@ -2,6 +2,7 @@ package com.sports.lottery.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sports.lottery.dto.LoginRequest;
+import com.sports.lottery.dto.LoginResult;
 import com.sports.lottery.dto.RegisterRequest;
 import com.sports.lottery.entity.User;
 
@@ -25,9 +26,9 @@ public interface UserService extends IService<User> {
      * 用户登录
      * 
      * @param request 登录请求
-     * @return JWT Token
+     * @return 登录结果，包含JWT Token和用户信息
      */
-    String login(LoginRequest request);
+    LoginResult login(LoginRequest request);
     
     /**
      * 根据用户名查询用户
