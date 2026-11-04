@@ -1,6 +1,6 @@
 package com.sports.lottery.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.sports.lottery.dto.DictDataResponse;
 import com.sports.lottery.entity.SysDictData;
 import com.sports.lottery.mapper.SysDictDataMapper;

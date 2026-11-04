@@ -2,7 +2,7 @@ package com.sports.lottery.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.sports.lottery.dto.LoginCache;
 import com.sports.lottery.dto.LoginRequest;
 import com.sports.lottery.dto.LoginResult;

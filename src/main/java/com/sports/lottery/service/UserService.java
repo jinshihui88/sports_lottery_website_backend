@@ -1,6 +1,6 @@
 package com.sports.lottery.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.sports.lottery.dto.LoginRequest;
 import com.sports.lottery.dto.LoginResult;
 import com.sports.lottery.dto.RegisterRequest;

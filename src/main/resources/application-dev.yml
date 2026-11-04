@@ -22,23 +22,21 @@ spring:
   # Redis 配置
   data:
     redis:
-    host: 127.0.0.1
-    port: 6379
-    password: AXB37nVDNQrvWK@jPpfJERxG8
-    database: 0
-    timeout: 3000ms
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
+      host: 127.0.0.1
+      port: 6379
+      password: AXB37nVDNQrvWK@jPpfJERxG8
+      database: 0
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
 
   # Jackson 配置
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-    serialization:
-      write-dates-as-timestamps: false
 
 # MyBatis Plus 配置
 mybatis-plus:
