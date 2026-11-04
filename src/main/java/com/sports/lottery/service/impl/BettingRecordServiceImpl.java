@@ -31,6 +31,12 @@ import java.util.Map;
 public class BettingRecordServiceImpl extends ServiceImpl<BettingRecordMapper, BettingRecord>
         implements BettingRecordService {
 
+    /** 投注结果：中奖 */
+    private static final Integer RESULT_WIN = 1;
+
+    /** 投注结果：未中奖 */
+    private static final Integer RESULT_LOSE = 2;
+
     private final BettingRecordMapper bettingRecordMapper;
 
     @Override
@@ -191,14 +197,12 @@ public class BettingRecordServiceImpl extends ServiceImpl<BettingRecordMapper, B
 
         // 胜率统计
         long winCount = records.stream()
-                .filter(record -> "WIN".equals(record.getResult()))
+                .filter(record -> RESULT_WIN.equals(record.getResult()))
                 .count();
         long loseCount = records.stream()
-                .filter(record -> "LOSE".equals(record.getResult()))
+                .filter(record -> RESULT_LOSE.equals(record.getResult()))
                 .count();
-        long drawCount = records.stream()
-                .filter(record -> "DRAW".equals(record.getResult()))
-                .count();
+        long drawCount = 0;
 
         statistics.put("winCount", winCount);
         statistics.put("loseCount", loseCount);

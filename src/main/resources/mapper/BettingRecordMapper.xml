@@ -5,24 +5,25 @@
     <!-- 按日期统计投注数据 -->
     <select id="getDailyStatistics" resultType="java.util.Map">
         SELECT 
-            DATE(match_date) as date,
+            DATE(bet_date) as date,
             COUNT(*) as betCount,
             SUM(bet_amount) as totalBetAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) as totalWinAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) - SUM(bet_amount) as netProfit,
-            COUNT(CASE WHEN result = 'WIN' THEN 1 END) as winCount,
-            COUNT(CASE WHEN result = 'LOSE' THEN 1 END) as loseCount,
-            COUNT(CASE WHEN result = 'DRAW' THEN 1 END) as drawCount
+            COUNT(CASE WHEN result = 1 THEN 1 END) as winCount,
+            COUNT(CASE WHEN result = 2 THEN 1 END) as loseCount,
+            0 as drawCount
         FROM betting_record 
         WHERE user_id = #{userId}
+            AND deleted = 0
         <if test="startDate != null">
-            AND match_date &gt;= #{startDate}
+            AND bet_date &gt;= #{startDate}
         </if>
         <if test="endDate != null">
-            AND match_date &lt;= #{endDate}
+            AND bet_date &lt;= #{endDate}
         </if>
-        GROUP BY DATE(match_date)
-        ORDER BY DATE(match_date) DESC
+        GROUP BY DATE(bet_date)
+        ORDER BY DATE(bet_date) DESC
     </select>
 
     <!-- 按联赛统计投注数据 -->
@@ -33,17 +34,18 @@
             SUM(bet_amount) as totalBetAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) as totalWinAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) - SUM(bet_amount) as netProfit,
-            COUNT(CASE WHEN result = 'WIN' THEN 1 END) as winCount,
-            COUNT(CASE WHEN result = 'LOSE' THEN 1 END) as loseCount,
-            COUNT(CASE WHEN result = 'DRAW' THEN 1 END) as drawCount,
-            ROUND(COUNT(CASE WHEN result = 'WIN' THEN 1 END) * 100.0 / COUNT(*), 2) as winRate
+            COUNT(CASE WHEN result = 1 THEN 1 END) as winCount,
+            COUNT(CASE WHEN result = 2 THEN 1 END) as loseCount,
+            0 as drawCount,
+            ROUND(COUNT(CASE WHEN result = 1 THEN 1 END) * 100.0 / COUNT(*), 2) as winRate
         FROM betting_record 
         WHERE user_id = #{userId}
+            AND deleted = 0
         <if test="startDate != null">
-            AND match_date &gt;= #{startDate}
+            AND bet_date &gt;= #{startDate}
         </if>
         <if test="endDate != null">
-            AND match_date &lt;= #{endDate}
+            AND bet_date &lt;= #{endDate}
         </if>
         GROUP BY league
         ORDER BY betCount DESC
@@ -57,17 +59,18 @@
             SUM(bet_amount) as totalBetAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) as totalWinAmount,
             SUM(CASE WHEN win_amount IS NOT NULL THEN win_amount ELSE 0 END) - SUM(bet_amount) as netProfit,
-            COUNT(CASE WHEN result = 'WIN' THEN 1 END) as winCount,
-            COUNT(CASE WHEN result = 'LOSE' THEN 1 END) as loseCount,
-            COUNT(CASE WHEN result = 'DRAW' THEN 1 END) as drawCount,
-            ROUND(COUNT(CASE WHEN result = 'WIN' THEN 1 END) * 100.0 / COUNT(*), 2) as winRate
+            COUNT(CASE WHEN result = 1 THEN 1 END) as winCount,
+            COUNT(CASE WHEN result = 2 THEN 1 END) as loseCount,
+            0 as drawCount,
+            ROUND(COUNT(CASE WHEN result = 1 THEN 1 END) * 100.0 / COUNT(*), 2) as winRate
         FROM betting_record 
         WHERE user_id = #{userId}
+            AND deleted = 0
         <if test="startDate != null">
-            AND match_date &gt;= #{startDate}
+            AND bet_date &gt;= #{startDate}
         </if>
         <if test="endDate != null">
-            AND match_date &lt;= #{endDate}
+            AND bet_date &lt;= #{endDate}
         </if>
         GROUP BY bet_type
         ORDER BY betCount DESC
