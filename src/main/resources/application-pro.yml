@@ -19,8 +19,9 @@ spring:
       max-lifetime: 1500000
       keepalive-time: 300000
 
-  # Redis 配置（Spring Boot 2.7 前缀为 spring.redis，勿用 Boot3 的 spring.data.redis）
-  redis:
+  # Redis 配置
+  data:
+    redis:
     host: 39.107.71.31
     port: 6379
     password: AXB37nVDNQrvWK@jPpfJERxG8
