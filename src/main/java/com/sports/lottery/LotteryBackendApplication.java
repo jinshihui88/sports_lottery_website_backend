@@ -20,7 +20,7 @@ public class LotteryBackendApplication {
         SpringApplication.run(LotteryBackendApplication.class, args);
         System.out.println("=================================");
         System.out.println("体彩投注记录管理系统后端启动成功！");
-        System.out.println("API文档地址: http://localhost:8080/swagger-ui.html");
+        System.out.println("API文档地址: http://localhost:49152/swagger-ui.html");
         System.out.println("=================================");
     }
 }
